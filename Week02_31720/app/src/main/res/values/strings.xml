@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Week02_31720</string>
+    <string name="numb1">First Number</string>
+    <string name="numb2">Second Number</string>
+    <string name="btnPlus">Add</string>
+    <string name="btnMinus">Min</string>
+    <string name="btnTimes">Times</string>
+    <string name="btnDivide">Divide</string>
+    <string name="result">Result</string>
+</resources>
