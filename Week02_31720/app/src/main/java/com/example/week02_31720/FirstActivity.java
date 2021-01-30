@@ -50,15 +50,23 @@ public class FirstActivity extends AppCompatActivity {
     }
 
     protected void countnumb(char operator){
-        double oper1 = Double.parseDouble(numb1.getText().toString());
-        double oper2 = Double.parseDouble(numb2.getText().toString());
-        double resl = 0.0;
-        switch(operator){
-            case('+') : resl = oper1+oper2;break;
-            case('-') : resl = oper1-oper2;break;
-            case('*') : resl = oper1*oper2;break;
-            case('/') : resl = oper1/oper2;
+        String oper1 = numb1.getText().toString();
+        String oper2 = numb2.getText().toString();
+
+        if(!oper1.isEmpty()&&!oper2.isEmpty()){
+            double opers1 = Double.parseDouble(oper1);
+            double opers2 = Double.parseDouble(oper2);
+            double resl = 0.0;
+            switch(operator){
+                case('+') : resl = opers1+opers2;break;
+                case('-') : resl = opers1-opers2;break;
+                case('*') : resl = opers1*opers2;break;
+                case('/') : resl = opers1/opers2;
+            }
+            result.setText(String.valueOf(resl));
+        } else{
+                result.setText("Incomplete Field, please fill out both number");
         }
-        result.setText(String.valueOf(resl));
     }
+
 }
