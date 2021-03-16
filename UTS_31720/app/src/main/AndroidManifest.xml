@@ -9,9 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UTS_31720">
-        <activity android:name=".ActivityProfile"></activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ActivityProfile"
+            android:label="Profile"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT ACTIVITY"
+                android:value="com.example.uts_31720.MainActivity"/>
+        </activity>
+        <activity android:name=".LoginActivity"
+            android:label="Login"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT ACTIVITY"
+                android:value="com.example.uts_31720.MainActivity"/>
+        </activity>
+        <activity android:name=".MainActivity" android:theme="@style/MainTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
