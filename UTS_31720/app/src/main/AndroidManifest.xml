@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.uts_31720">
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,21 +9,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UTS_31720">
-        <activity android:name=".ActivityProfile"
+        <activity android:name=".SongLibrary"
+            android:label="Song Library"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/MainTheme">
+            <meta-data
+                android:name="android.support.PARENT ACTIVITY"
+                android:value="com.example.uts_31720.LoginActivity"/>
+        </activity>
+        <activity
+            android:name=".ActivityProfile"
             android:label="Profile"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT ACTIVITY"
-                android:value="com.example.uts_31720.MainActivity"/>
+                android:value="com.example.uts_31720.MainActivity" />
         </activity>
-        <activity android:name=".LoginActivity"
+        <activity
+            android:name=".LoginActivity"
             android:label="Login"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT ACTIVITY"
-                android:value="com.example.uts_31720.MainActivity"/>
+                android:value="com.example.uts_31720.MainActivity" />
         </activity>
-        <activity android:name=".MainActivity" android:theme="@style/MainTheme">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/MainTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
