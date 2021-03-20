@@ -7,10 +7,11 @@
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/songTitle"
+        android:id="@+id/sTitle"
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="35dp"
-        android:textColor="#2196F3"/>
+        android:layout_height="60dp"
+        android:textSize="45dp"
+        android:textColor="#2196F3" />
 
 </LinearLayout>

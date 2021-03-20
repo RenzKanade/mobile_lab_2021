@@ -86,7 +86,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         final SongAdapter sAdapter;
         public SongViewHolder(@NonNull View itemView, SongAdapter adapter) {
             super(itemView);
-            songTitle = itemView.findViewById(R.id.songTitle);
+            songTitle = itemView.findViewById(R.id.sTitle);
             this.sAdapter = adapter;
 
             itemView.setOnClickListener(new View.OnClickListener() {

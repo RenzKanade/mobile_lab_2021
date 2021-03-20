@@ -35,15 +35,15 @@ import java.util.List;
 
 public class SongLibrary extends AppCompatActivity implements SongAdapter.SongAdapterListener{
 
-    PopupWindow welcomeCard;
-    Button closeBtn;
-    LinearLayout cL;
-    Toolbar toolbar;
+    public PopupWindow welcomeCard;
+    public Button closeBtn;
+    public LinearLayout cL;
+    public Toolbar toolbar;
     private final int STORAGE_PERMISSION_ID = 0;
     private List<Song> songLists = new ArrayList<>();
-    RecyclerView songRecyclerView;
-    SongAdapter sAdapter;
-    LinearLayout lLayout;
+    public RecyclerView songRecyclerView;
+    public SongAdapter sAdapter;
+    //public LinearLayout lLayout;
 
 
     @Override
@@ -54,12 +54,12 @@ public class SongLibrary extends AppCompatActivity implements SongAdapter.SongAd
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Song Library");
+        init();
         songRecyclerView = (RecyclerView) findViewById(R.id.songListView);
         sAdapter = new SongAdapter(getApplicationContext(),songLists,this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         songRecyclerView.setAdapter(sAdapter);
         songRecyclerView.setLayoutManager(layoutManager);
-        init();
 
         LayoutInflater lI = (LayoutInflater) SongLibrary.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View cV = lI.inflate(R.layout.welcome_popup,null);
@@ -155,20 +155,29 @@ public class SongLibrary extends AppCompatActivity implements SongAdapter.SongAd
     public void GetSongLists(){
         ContentResolver musicResolver = getContentResolver();
         Uri mscUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        Cursor mscCursor = getApplicationContext().getContentResolver().query(mscUri,null,null,null,null);
+        String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0";
+        Cursor mscCursor = musicResolver.query(mscUri,null,selection,null,null);
 
         if (mscCursor != null && mscCursor.moveToFirst()){
             int titleColumn = mscCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
             int idColumn = mscCursor.getColumnIndex(MediaStore.Audio.Media._ID);
             int durationColumn = mscCursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
             int sizeColumn = mscCursor.getColumnIndex(MediaStore.Audio.Media.SIZE);
+            int artistColumn = mscCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
+            int albumColumn = mscCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM);
+            int albumIdColumn= mscCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
+            int dataColumn=mscCursor.getColumnIndex(MediaStore.Audio.Media.DATA);
             do {
                 long thisId = mscCursor.getLong(idColumn);
                 String thisTitle = mscCursor.getString(titleColumn);
                 int thisDuration = mscCursor.getInt(durationColumn);
                 int thisSize = mscCursor.getInt(sizeColumn);
                 Uri thisUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,thisId);
-                songLists.add(new Song(thisUri,thisId,thisTitle,thisDuration,thisSize));
+                String thisArtist = mscCursor.getString(artistColumn);
+                String thisAlbum = mscCursor.getString(albumColumn);
+                int thisAlbumId = mscCursor.getInt(albumIdColumn);
+                String thisData = mscCursor.getString(dataColumn);
+                songLists.add(new Song(thisUri,thisId,thisTitle,thisDuration,thisSize,thisArtist,thisAlbum,thisAlbumId, thisData));
             } while(mscCursor.moveToNext());
         }
         assert mscCursor != null;

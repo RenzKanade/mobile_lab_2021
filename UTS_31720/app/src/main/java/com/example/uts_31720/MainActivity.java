@@ -10,9 +10,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
-    ImageView appLogo;
-    Button toLogin;
-    Button toProfile;
+    public ImageView appLogo;
+    public Button toLogin;
+    public Button toProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
