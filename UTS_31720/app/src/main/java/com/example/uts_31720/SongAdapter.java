@@ -16,14 +16,16 @@ import java.util.List;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder>implements Filterable{
 
-    private List<Song> songLists;
+    private final List<Song> songLists;
     private List<Song> songListsFiltered;
+    private LayoutInflater lInflater;
     private Context songContext;
-    private SongAdapterListener songAdapter;
+    private SongAdapterListener songListener;
 
-    public SongAdapter(Context context,List<Song> songList, SongAdapterListener adapter){
+    public SongAdapter(Context context,List<Song> songList, SongAdapterListener listener){
         this.songContext = context;
-        this.songAdapter = adapter;
+        this.songListener = listener;
+        this.lInflater = LayoutInflater.from(context);
         this.songLists = songList;
         this.songListsFiltered = songList;
     }
@@ -82,17 +84,17 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     }
 
     public class SongViewHolder extends RecyclerView.ViewHolder {
-        public TextView songTitle;
+        public final TextView songTitle;
         final SongAdapter sAdapter;
         public SongViewHolder(@NonNull View itemView, SongAdapter adapter) {
             super(itemView);
-            songTitle = itemView.findViewById(R.id.sTitle);
+            songTitle = (TextView) itemView.findViewById(R.id.sTitle);
             this.sAdapter = adapter;
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    songAdapter.onSongSelected(songListsFiltered.get(getAdapterPosition()));
+                    songListener.onSongSelected(songListsFiltered.get(getAdapterPosition()));
                 }
             });
         }

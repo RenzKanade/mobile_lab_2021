@@ -41,8 +41,8 @@ public class SongLibrary extends AppCompatActivity implements SongAdapter.SongAd
     public Toolbar toolbar;
     private final int STORAGE_PERMISSION_ID = 0;
     private List<Song> songLists = new ArrayList<>();
-    public RecyclerView songRecyclerView;
-    public SongAdapter sAdapter;
+    private RecyclerView songRecyclerView;
+    private SongAdapter sAdapter;
     //public LinearLayout lLayout;
 
 
@@ -176,8 +176,8 @@ public class SongLibrary extends AppCompatActivity implements SongAdapter.SongAd
                 String thisArtist = mscCursor.getString(artistColumn);
                 String thisAlbum = mscCursor.getString(albumColumn);
                 int thisAlbumId = mscCursor.getInt(albumIdColumn);
-                String thisData = mscCursor.getString(dataColumn);
-                songLists.add(new Song(thisUri,thisId,thisTitle,thisDuration,thisSize,thisArtist,thisAlbum,thisAlbumId, thisData));
+                Uri thisData = Uri.parse(mscCursor.getString(dataColumn));
+                songLists.add(new Song(thisUri,thisId,thisTitle,thisDuration,thisSize,thisArtist,thisAlbum,thisAlbumId, thisData.toString()));
             } while(mscCursor.moveToNext());
         }
         assert mscCursor != null;
